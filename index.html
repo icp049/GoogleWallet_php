@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Wallet Codelab</title>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        window.addEventListener('load', function() {
+            document.getElementById('form').addEventListener('submit', function(e) {
+                e.preventDefault();
+               
+                fetch('wallet.php', {
+                    method: 'POST'
+                }).then(function(res) {
+                    return res.text();
+                }).then(function(saveUrl) {
+                    window.location.href = saveUrl;
+                });
+            });
+        });
+    </script>
+  
+    
+    <meta name="google-signin-client_id" content="698113044245-uctid94kngrgrfl44o0k8di40eoeh1r4.apps.googleusercontent.com">
+</head>
+<body>
+    <div id="content">
+        <form id="form" action="{}" method="post">
+            
+            <input type="image" src="wallet-button.png" alt="Create pass" id="submitImage" style="width: 500px; cursor: pointer;">
+           
+        </form>
+    </div>
+</body>
+</html>
