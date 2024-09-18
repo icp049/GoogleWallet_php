@@ -1,0 +1,9 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "^7.8",
+        "firebase/php-jwt": "^6.10",
+        "google/apiclient": "^2.16",
+        "google/auth": "^1.40",
+        "picqer/php-barcode-generator": "^2.4"
+    }
+}
