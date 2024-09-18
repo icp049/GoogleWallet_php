@@ -14,7 +14,7 @@ class WalletPass {
     public function __construct($credentialsPath) {
         $this->credentials = json_decode(file_get_contents($credentialsPath), true);
         $this->client = new Client();
-        $this->classId = $this->issuerId . '.ReginaPublicLibraryCard';
+        $this->classId = $this->issuerId . '.';
     }
 
     private function getAuthToken() {
