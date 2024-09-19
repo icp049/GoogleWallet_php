@@ -1,90 +1,98 @@
 # Google Wallet Pass Generator
 
-Dieses Projekt ist eine einfache Webanwendung, die es ermöglicht, einen Google Wallet Pass zu erstellen und in der Google Wallet App zu speichern. Die Anwendung nutzt die Google Wallet API und verwendet PHP für die Backend-Logik.
+This project is a simple web application that allows you to create a Google Wallet Pass and store it in the Google Wallet app. The application uses the Google Wallet API and PHP for backend logic.
 
-## Voraussetzungen
+## Prerequisites
 
-- **Docker** (Installiert)
-- **Docker Compose** (Installiert)
-- **Google Cloud Account** mit aktiviertem Google Wallet API
-- **Google Wallet API Zugangsdaten** (client_email und private_key)
+- **Docker** (Installed)
+- **Docker Compose** (Installed)
+- **Google Cloud Account** with Google Wallet API enabled
+- **Google Wallet API credentials** (client_email and private_key)
 
 ## Installation
 
-### 1. Projekt klonen
+### 1. Clone the project
 
-Klonen Sie das Repository:
+Clone the repository:
 
 ```bash
-git clone https://github.com/dein-username/dein-repository.git
-cd dein-repository
+git clone https://github.com/your-username/your-repository.git
+cd your-repository
 ```
 
-### 2. Google Wallet API Zugangsdaten konfigurieren
+### 2. Configure Google Wallet API credentials
 
-Erstellen Sie im Verzeichnis `config/` eine Datei namens `walletconfig.json`. Nutzen Sie dafür die Datei `walletconfig.json_example` als Vorlage:
+Create a file named `walletconfig.json` in the `config/` directory. Use the `walletconfig.json_example` file as a template:
 
 ```bash
 cp config/walletconfig.json_example config/walletconfig.json
 ```
 
-Fügen Sie Ihre Google Wallet API-Zugangsdaten in die Datei `walletconfig.json` ein:
+Add your Google Wallet API credentials to the `walletconfig.json` file:
 
 ```json
 {
-  "client_email": "YOUR_CLIENT_EMAIL",
-  "private_key": "YOUR_PRIVATE_KEY"
+  "type": "",
+  "project_id": "",
+  "private_key_id": "",
+  "private_key": "",
+  "client_email": "",
+  "client_id": "",
+  "auth_uri": "",
+  "token_uri": "",
+  "auth_provider_x509_cert_url": "",
+  "client_x509_cert_url": "",
+  "universe_domain": "googleapis.com"
 }
 ```
 
-Stellen Sie sicher, dass die Datei `walletconfig.json` nicht in das Repository hochgeladen wird, indem Sie die `.gitignore`-Datei verwenden.
+Make sure that the `walletconfig.json` file is not uploaded to the repository by using the `.gitignore` file.
 
-### 3. Docker verwenden
+### 3. Use Docker
 
-Dieses Projekt enthält eine `docker-compose.yml`-Datei, die den Webserver mit dem `php:apache`-Image bereitstellt.
+This project includes a `docker-compose.yml` file that sets up the web server using the `php:apache` image.
 
-#### 3.1 Docker-Container starten
+#### 3.1 Start the Docker container
 
-Führen Sie folgenden Befehl aus, um den Container zu starten:
+Run the following command to start the container:
 
 ```bash
 docker-compose up -d && docker-compose logs -f
 ```
 
-#### 3.2 Zugriff auf die Anwendung
+#### 3.2 Access the application
 
-Sobald der Container läuft, können Sie die Anwendung in Ihrem Webbrowser unter `http://localhost:8080` aufrufen.
+Once the container is running, you can access the application in your web browser at `http://localhost:8080`.
 
-### 4. Composer-Abhängigkeiten installieren
+### 4. Install Composer dependencies
 
-Sobald der Container läuft, können Sie Composer-Abhängigkeiten im Container installieren:
+Once the container is running, you can install Composer dependencies inside the container:
 
 ```bash
 docker exec -it <container_name> bash
 composer install
 ```
 
-Ersetzen Sie `<container_name>` durch den Namen des laufenden Containers (Sie können ihn mit `docker ps` finden).
+Replace `<container_name>` with the name of the running container (you can find it with `docker ps`).
 
-## Struktur des Projekts
+## Project Structure
 
-- **index.html**: Frontend, das den Google Wallet Button und das Formular bereitstellt.
-- **wallet.php**: Backend-Logik, die die Erstellung des Google Wallet Passes handhabt.
-- **config/walletconfig.json**: Konfigurationsdatei für die Google Wallet API-Zugangsdaten.
-- **composer.json**: Enthält die Projektabhängigkeiten.
-- **docker-compose.yml**: Docker-Konfigurationsdatei, um die Anwendung in einem Container zu hosten.
+- **index.html**: Frontend that provides the Google Wallet button and form.
+- **wallet.php**: Backend logic that handles the creation of the Google Wallet pass.
+- **config/walletconfig.json**: Configuration file for Google Wallet API credentials.
+- **composer.json**: Contains project dependencies.
+- **docker-compose.yml**: Docker configuration file to host the application in a container.
 
-## Wichtige Hinweise
+## Important Notes
 
-- Die Datei `config/walletconfig.json` enthält sensible Daten. Stellen Sie sicher, dass diese Datei niemals in ein öffentliches Repository hochgeladen wird.
-- Die Anwendung ist aktuell auf das Testen mit einem hartkodierten Kontonummer (`accountNumber`) und Standardwerten für Vor- und Nachnamen ausgelegt.
+- The `config/walletconfig.json` file contains sensitive data. Make sure this file is never uploaded to a public repository.
+- The application is currently set up for testing with a hardcoded account number (`accountNumber`) and default values for first and last names.
 
-## Lizenz
+## License
 
-Dieses Projekt steht unter der MIT-Lizenz.
-```
+This project is licensed under the MIT License.
 
-### Beispiel `docker-compose.yml`
+### Example `docker-compose.yml`
 
 ```yaml
 version: '3.8'
