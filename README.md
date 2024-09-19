@@ -48,6 +48,8 @@ Add your Google Wallet API credentials to the `walletconfig.json` file:
 
 Make sure that the `walletconfig.json` file is not uploaded to the repository by using the `.gitignore` file.
 
+You must add your `issuerId` in **wallet.php** at line 11 (`private $issuerId = '';`). The `issuerId` is required to create Google Wallet objects and should be obtained from your Google Wallet API configuration.
+
 ### 3. Use Docker
 
 This project includes a `docker-compose.yml` file that sets up the web server using the `php:apache` image.
