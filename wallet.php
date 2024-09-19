@@ -8,7 +8,7 @@ class WalletPass {
     private $credentials;
     private $client;
     private $baseUrl = 'https://walletobjects.googleapis.com/walletobjects/v1';
-    private $issuerId = '3388000000022737642';
+    private $issuerId = '';
     private $classId;
 
     public function __construct($credentialsPath) {
