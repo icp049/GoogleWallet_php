@@ -48,20 +48,21 @@ class WalletPass {
         $objectId = "{$this->issuerId}.{$randomNumber}";
 
             // Data is taken from POST
-            $form_id = htmlspecialchars($_POST['form_id']);
-            $form_firstname = htmlspecialchars($_POST['form_firstname']);
-            $form_lastname = htmlspecialchars($_POST['form_lastname']);
+            $form_accountNumber = htmlspecialchars($_POST['form_accountNumber']);
+            $form_firstName = htmlspecialchars($_POST['form_firstName']);
+            $form_lastName = htmlspecialchars($_POST['form_lastName']);
 
-        $accountNumber = $form_id;  // Hardcoded account number
+        $accountNumber = $form_accountNumber;  // Hardcoded account number
         $codabar = $this->formatCodabar($accountNumber);
-        $firstName = $form_firstname . " ";
-        $lastName = $form_lastname;
+        $firstName = $form_firstName;
+        $lastName = $form_lastName;
         
 
         $genericObject = [
             'id' => $objectId,
             'classId' => $this->classId,
             'genericType' => 'GENERIC_TYPE_UNSPECIFIED',
+            "state" => "ACTIVE",
             'logo' => [
                 'sourceUri' => [
                     'uri' => ''
