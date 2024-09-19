@@ -8,7 +8,7 @@ class WalletPass {
     private $credentials;
     private $client;
     private $baseUrl = 'https://walletobjects.googleapis.com/walletobjects/v1';
-    private $issuerId = '';
+    private $issuerId = '3388000000022737642';
     private $classId;
 
     public function __construct($credentialsPath) {
@@ -110,6 +110,11 @@ class WalletPass {
         return $saveUrl;
     }
 }
+
+
+$json = json_decode(file_get_contents('prod.api.pvp.net/api/lol/euw/v1.1/game/by-summoner/20986461/recent?api_key=*key*'));
+
+print_r($json);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Access-Control-Allow-Origin: *");
