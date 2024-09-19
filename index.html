@@ -2,14 +2,18 @@
 <html>
 <head>
     <title>Google Wallet Codelab</title>
+    <meta charset="UTF-8">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
         window.addEventListener('load', function() {
             document.getElementById('form').addEventListener('submit', function(e) {
                 e.preventDefault();
-               
+
+                const formData = new FormData(this);
+
                 fetch('wallet.php', {
-                    method: 'POST'
+                    method: 'POST',
+                    body: formData
                 }).then(function(res) {
                     return res.text();
                 }).then(function(saveUrl) {
@@ -18,17 +22,65 @@
             });
         });
     </script>
-  
-    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .entries {
+            margin-top: 20px;
+        }
+    </style>
     <meta name="google-signin-client_id" content="">
 </head>
 <body>
     <div id="content">
-        <form id="form" action="{}" method="post">
-            
-            <input type="image" src="config/wallet-button.png" alt="Create pass" id="submitImage" style="width: 500px; cursor: pointer;">
-           
-        </form>
+        <div class="container">
+            <h1>Digitalen Schülerausweiß erstellen.</h1>
+            <form id="form" action="wallet.php" method="post">
+                <div class="form-group">
+                    <label for="form_id">Random ID:</label>
+                    <input type="text" id="form_id" name="form_id">
+                </div>
+                <div class="form-group">
+                    <label for="form_firstname">Vorname:</label>
+                    <input type="text" id="form_firstname" name="form_firstname">
+                </div>
+                <div class="form-group">
+                    <label for="form_lastname">Nachname:</label>
+                    <input type="text" id="form_lastname" name="form_lastname">
+                </div>
+                <div class="form-group">
+                    <input type="image" src="config/wallet-button.png" alt="Create pass" id="submitImage" style="width: 200px; cursor: pointer;">
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

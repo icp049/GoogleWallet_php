@@ -47,10 +47,15 @@ class WalletPass {
         $randomNumber = rand(1000, 9999);
         $objectId = "{$this->issuerId}.{$randomNumber}";
 
-        $accountNumber = "29085006805780";  // Hardcoded account number
+            // Data is taken from POST
+            $form_id = htmlspecialchars($_POST['form_id']);
+            $form_firstname = htmlspecialchars($_POST['form_firstname']);
+            $form_lastname = htmlspecialchars($_POST['form_lastname']);
+
+        $accountNumber = $form_id;  // Hardcoded account number
         $codabar = $this->formatCodabar($accountNumber);
-        $firstName = "Test ";
-        $lastName = "Test";
+        $firstName = $form_firstname . " ";
+        $lastName = $form_lastname;
         
 
         $genericObject = [
@@ -65,7 +70,7 @@ class WalletPass {
             'cardTitle' => [
                 'defaultValue' => [
                     'language' => 'en',
-                    'value' => ''
+                    'value' => '1'
                 ]
             ],
             'header' => [
@@ -110,11 +115,6 @@ class WalletPass {
         return $saveUrl;
     }
 }
-
-
-$json = json_decode(file_get_contents('prod.api.pvp.net/api/lol/euw/v1.1/game/by-summoner/20986461/recent?api_key=*key*'));
-
-print_r($json);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Access-Control-Allow-Origin: *");
