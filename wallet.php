@@ -8,7 +8,7 @@ class WalletPass {
     private $credentials;
     private $client;
     private $baseUrl = 'https://walletobjects.googleapis.com/walletobjects/v1';
-    private $issuerId = '';
+    private $issuerId = '3388000000022754147';
     private $classId;
 
     public function __construct($credentialsPath) {
@@ -44,7 +44,9 @@ class WalletPass {
     }
 
     public function createPassObject() {
-        $randomNumber = rand(1000, 9999);
+        $len = 4;
+        $randomBytes = Zend_Crypt_Math::randBytes($len);
+        $randomNumber = (string) hexdec(bin2hex($randomBytes));
         $objectId = "{$this->issuerId}.{$randomNumber}";
 
             // Data is taken from POST
