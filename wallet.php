@@ -1,9 +1,24 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require 'vendor/autoload.php';
 
 use GuzzleHttp\Client;
 use Firebase\JWT\JWT;
 use Laminas\Math\Rand;
+
+
+try {
+    $walletPass = new WalletPass('config/walletconfig.json');
+    echo $walletPass->createPassObject();
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode(['error' => $e->getMessage()]);
+}
+
+
 
 class WalletPass {
     private $credentials;

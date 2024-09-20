@@ -16,9 +16,14 @@
                         method: 'POST',
                         body: formData
                     }).then(function(res) {
+                        if (!res.ok) {
+                            console.error('Network response was not ok:', res.statusText);
+                        }
                         return res.text();
                     }).then(function(saveUrl) {
                         window.location.href = saveUrl;
+                    }).catch(function(error) {
+                        console.error('There was a problem with the fetch operation:', error);
                     });
                 } catch (e) {
                     window.setTimeout(() => window.location.reload(), 1000);
