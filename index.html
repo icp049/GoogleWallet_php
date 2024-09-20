@@ -11,14 +11,18 @@
 
                 const formData = new FormData(this);
 
-                fetch('wallet.php', {
-                    method: 'POST',
-                    body: formData
-                }).then(function(res) {
-                    return res.text();
-                }).then(function(saveUrl) {
-                    window.location.href = saveUrl;
-                });
+                try {
+                    fetch('wallet.php', {
+                        method: 'POST',
+                        body: formData
+                    }).then(function(res) {
+                        return res.text();
+                    }).then(function(saveUrl) {
+                        window.location.href = saveUrl;
+                    });
+                } catch (e) {
+                    window.setTimeout(() => window.location.reload(), 1000);
+                }
             });
         });
     </script>

@@ -3,6 +3,7 @@ require 'vendor/autoload.php';
 
 use GuzzleHttp\Client;
 use Firebase\JWT\JWT;
+use Laminas\Math\Rand;
 
 class WalletPass {
     private $credentials;
@@ -14,7 +15,7 @@ class WalletPass {
     public function __construct($credentialsPath) {
         $this->credentials = json_decode(file_get_contents($credentialsPath), true);
         $this->client = new Client();
-        $this->classId = $this->issuerId . '.';
+        $this->classId = $this->issuerId . '.meins';
     }
 
     private function getAuthToken() {
@@ -45,20 +46,20 @@ class WalletPass {
 
     public function createPassObject() {
         $len = 4;
-        $randomBytes = Zend_Crypt_Math::randBytes($len);
-        $randomNumber = (string) hexdec(bin2hex($randomBytes));
-        $objectId = "{$this->issuerId}.{$randomNumber}";
+        $randomBytes = Rand::getBytes($len);
+        $randomNumber = hexdec(bin2hex($randomBytes));
 
-            // Data is taken from POST
-            $form_accountNumber = htmlspecialchars($_POST['form_accountNumber']);
-            $form_firstName = htmlspecialchars($_POST['form_firstName']);
-            $form_lastName = htmlspecialchars($_POST['form_lastName']);
+        $randomNumber = 1000 + ($randomNumber % 9000);      
+        $objectId = "{$this->issuerId}.{$randomNumber}"; 
 
-        $accountNumber = $form_accountNumber;  // Hardcoded account number
+        $form_accountNumber = htmlspecialchars($_POST['form_accountNumber']);
+        $form_firstName = htmlspecialchars($_POST['form_firstName']);
+        $form_lastName = htmlspecialchars($_POST['form_lastName']);
+
+        $accountNumber = $form_accountNumber;
         $codabar = $this->formatCodabar($accountNumber);
         $firstName = $form_firstName;
         $lastName = $form_lastName;
-        
 
         $genericObject = [
             'id' => $objectId,
@@ -85,9 +86,9 @@ class WalletPass {
             'barcode' => [
                 'type' => 'CODABAR',
                 'value' => $codabar,
-                'alternateText' => $accountNumber // Added missing 'alternateText'
+                'alternateText' => $accountNumber
             ],
-            'hexBackgroundColor' => '#6e3acf', // Fixed formatting and added to array
+            'hexBackgroundColor' => '#6e3acf',
             'heroImage' => [
                 'sourceUri' => [
                     'uri' => ''
@@ -100,7 +101,6 @@ class WalletPass {
                 ]
             ]
         ];
-        
 
         $claims = [
             'iss' => $this->credentials['client_email'],
@@ -113,14 +113,18 @@ class WalletPass {
         ];
 
         $token = JWT::encode($claims, $this->credentials['private_key'], 'RS256');
-        $saveUrl = "https://pay.google.com/gp/v/save/{$token}";
+
+        $host = "pay.google.com";
+        $saveUrl = "https://{$host}/gp/v/save/{$token}";
 
         return $saveUrl;
     }
 }
 
+$allowedOrigins = 'https://pay.google.com';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Origin: $allowedOrigins");
     header("Access-Control-Allow-Methods: POST");
     header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
@@ -128,9 +132,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo $walletPass->createPassObject();
 }
-
-
 ?>
-
-
-
