@@ -8,9 +8,8 @@
   b)Go to Google Wallet API
   c)Activate API
   d)Under IAM & Admin, go to Service Accounts and Add a Service Account
-  e)In my work case I named it as regina-public-library@extreme-splicer-424920-r1.iam.gserviceaccount.com
-  f)Under the Service Accounts, add the account and then go to Keys Tab
-  g)Click Add Key -> Create New Key: This should prompt you to download a json.file (You will use this later on as config.json in the code)
+  e)Under the Service Accounts, add the account and then go to Keys Tab
+  f)Click Add Key -> Create New Key: This should prompt you to download a json.file (You will use this later on as config.json in the code)
 
 
 #Google Play & Wallet Console
