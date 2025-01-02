@@ -13,8 +13,11 @@
 
 
 #Google Play & Wallet Console
+
 5) Once you created a business in Google Pay & Wallet Console, you will have a unique a merchant ID and Issuer ID (this is beside your business name) 
+
 6) Create a class for the pass. (This is done by triggering the code o connect to the API) 
+
 7) Request Publishing Access to Google for production usage 
 
 
