@@ -17,7 +17,7 @@ The Google Wallet PHP example uses the following Composer packages:
 }
 ~~~
 
-☁️ Google Cloud Console Setup
+
 1️⃣ Google Account & Business Profile
 
 -Use a Google Account
@@ -74,7 +74,7 @@ Open the downloaded JSON file and copy its contents into a file named: config.js
 
 
 
-🧾 Google Pay & Wallet Console Setup
+
 
 6️⃣ Access Google Pay & Wallet Console
 - Go to Google Pay & Wallet Console
