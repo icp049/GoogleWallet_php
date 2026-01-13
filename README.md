@@ -20,8 +20,8 @@ The Google Wallet PHP example uses the following Composer packages:
 
 1️⃣ Google Account & Business Profile
 
--Use a Google Account
--Set up your Business Profile under the same account (e.g Business name, Business location, Public business identity)
+- Use a Google Account
+- Set up your Business Profile under the same account (e.g Business name, Business location, Public business identity)
 
 
 
